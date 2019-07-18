@@ -39,15 +39,15 @@
     <p></p>
   </div>
   <div class="pagination" *ngIf="advertisements.length > 0">
-    <a [routerLink]="['']" [queryParams]="{ page: 1 }">&laquo;</a>
-    <a [routerLink]="['']" [queryParams]="{ page: 1 }" *ngIf="currentPage > 2">1</a>
+    <a [routerLink]="['']" [queryParams]="{ page: 1, district: district, search: search, priceLower: priceLower, priceUpper: priceUpper, roomsCount: roomsCount, sort: sort }">&laquo;</a>
+    <a [routerLink]="['']" [queryParams]="{ page: 1, district: district, search: search, priceLower: priceLower, priceUpper: priceUpper, roomsCount: roomsCount, sort: sort }" *ngIf="currentPage > 2">1</a>
     <a *ngIf="currentPage > 3">...</a>
-    <a [routerLink]="['']" [queryParams]="{ page: currentPage - 1 }" *ngIf="currentPage > 1">{{currentPage - 1}}</a>
+    <a [routerLink]="['']" [queryParams]="{ page: currentPage - 1, district: district, search: search, priceLower: priceLower, priceUpper: priceUpper, roomsCount: roomsCount, sort: sort }" *ngIf="currentPage > 1">{{currentPage - 1}}</a>
     <a class="active">{{currentPage}}</a>
-    <a [routerLink]="['']" [queryParams]="{ page: currentPage + 1 }" *ngIf="currentPage < pagesCount">{{currentPage + 1}}</a>
+    <a [routerLink]="['']" [queryParams]="{ page: currentPage + 1, district: district, search: search, priceLower: priceLower, priceUpper: priceUpper, roomsCount: roomsCount, sort: sort }" *ngIf="currentPage < pagesCount">{{currentPage + 1}}</a>
     <a *ngIf="currentPage < pagesCount - 2">...</a>
-    <a [routerLink]="['']" [queryParams]="{ page: pagesCount }" *ngIf="currentPage < pagesCount - 1">{{pagesCount}}</a>
-    <a [routerLink]="['']" [queryParams]="{ page: pagesCount }">&raquo;</a>
+    <a [routerLink]="['']" [queryParams]="{ page: pagesCount, district: district, search: search, priceLower: priceLower, priceUpper: priceUpper, roomsCount: roomsCount, sort: sort }" *ngIf="currentPage < pagesCount - 1">{{pagesCount}}</a>
+    <a [routerLink]="['']" [queryParams]="{ page: pagesCount, district: district, search: search, priceLower: priceLower, priceUpper: priceUpper, roomsCount: roomsCount, sort: sort }">&raquo;</a>
   </div>
   <div class="row">
     <span *ngIf="advertisements.length == 0">Результаты отсутствуют.</span>

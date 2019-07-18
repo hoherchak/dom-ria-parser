@@ -5,7 +5,7 @@ class Advertisement(models.Model):
     code = models.IntegerField()
     title = models.TextField()
     short_title = models.TextField()
-    description = models.TextField()
+    description = models.TextField(null=True, blank=True)
     district = models.TextField(null=True, blank=True)
     rooms_count = models.IntegerField()
     url = models.TextField()

@@ -36,10 +36,8 @@ def parse_kyiv():
             r = s.get('https://dom.ria.com/node/searchEngine/v2/view/realty/{}?lang_id=2'.format(ad_id))
             data = json.loads(r.text)
             short_name = ''
-            district = None
             if 'district_name' in data:
                 short_name = 'р‑н. {}'.format(data['district_name'])
-                district = data['district_name']
             if 'street_name' in data:
                 short_name += ' ' + data['street_name']
             short_name += ', {} ком. г. Киев'.format(data['rooms_count'])
@@ -52,8 +50,8 @@ def parse_kyiv():
                 code=ad_id,
                 title=title,
                 short_title=short_name,
-                description=data['description'],
-                district=district,
+                description=data.get('description', None),
+                district=data.get('district_name', None),
                 rooms_count=data['rooms_count'],
                 url=data['beautiful_url'],
                 image=image,

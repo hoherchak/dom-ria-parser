@@ -10,7 +10,7 @@ class AdvertisementFilter(filters.FilterSet):
     info = django_filters.CharFilter(field_name='info', method='info_action')
 
     def info_action(self, queryset, name, value):
-        return queryset.extra(where=['title || description LIKE %s'], params=['%' + value + '%'])
+        return queryset.extra(where=['CONCAT(title, description) LIKE %s'], params=['%' + value + '%'])
 
     class Meta:
         model = Advertisement

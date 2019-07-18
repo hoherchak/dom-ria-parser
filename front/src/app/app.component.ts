@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpService} from '../services/http.service';
-import {ActivatedRoute, Params} from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -31,25 +31,32 @@ export class AppComponent implements OnInit {
     }
   };
 
-  constructor(private httpService: HttpService, private activateRoute: ActivatedRoute) {
+  constructor(private httpService: HttpService, private activateRoute: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit() {
-    this.activateRoute.queryParams
-      .subscribe(params => {
-        if (params.page) {
-          this.currentPage = Number(params.page);
-        }
-      });
     this.httpService.getStats()
       .subscribe((data) => {
         this.stats = data;
         console.log(this.stats);
         this.priceLower = this.stats.price.min;
         this.priceUpper = this.stats.price.max;
+        this.activateRoute.queryParams
+          .subscribe(params => {
+            console.log(params);
+            if (params.page) {
+              this.currentPage = Number(params.page);
+              this.sort = params.sort;
+              this.district = params.district;
+              this.search = params.search;
+              this.priceLower = params.priceLower;
+              this.priceUpper = params.priceUpper;
+              this.roomsCount = params.roomsCount;
+              this.refresh_list();
+            }
+          });
       });
     this.refresh_list();
-    // this.currentPage = 1;
   }
 
   setPage(page: number) {
@@ -58,7 +65,18 @@ export class AppComponent implements OnInit {
   }
 
   filter() {
-    this.refresh_list();
+    // this.refresh_list();
+    this.router.navigate([''], {
+      queryParams: {
+        page: 1,
+        district: this.district,
+        search: this.search,
+        priceLower: this.priceLower,
+        priceUpper: this.priceUpper,
+        roomsCount: this.roomsCount,
+        sort: this.sort,
+      }
+    });
   }
 
   refresh_list() {
