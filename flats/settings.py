@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from flats.credentials import google_db
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -86,16 +88,7 @@ WSGI_APPLICATION = 'flats.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'HOST': '35.198.152.106',
-        'USER': 'lun',
-        'PASSWORD': 'J6F3aU4SqGsyLVf',
-        'NAME': 'domria',
-        'PORT': '3306',
-    },
-}
+DATABASES = google_db
 
 
 # Password validation
