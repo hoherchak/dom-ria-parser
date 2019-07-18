@@ -1,0 +1,81 @@
+<html lang="en">
+
+<head>
+  <title>Pure CSS Material Design cards</title>
+</head>
+
+<body>
+
+<div class="container" style="text-align: center;">
+  <div>
+    <label>
+      Поиск: <input type="text" [(ngModel)]="search">
+    </label>
+    <p></p>
+    <label>
+      Цена: от <input type="number" [(ngModel)]="priceLower" min="0" max="{{priceUpper}}"> до <input type="number" [(ngModel)]="priceUpper" min="{{priceLower}}" max="">
+    </label>
+    <label>
+      Количество комнат: <input type="number" [(ngModel)]="roomsCount" min="0">
+    </label>
+    <label>
+      Район:
+      <select [(ngModel)]="district">
+        <option value="">Все</option>
+        <option value="Голосеевский">Голосеевский</option>
+        <option value="Дарницкий">Дарницкий</option>
+        <option value="Деснянский">Деснянский</option>
+        <option value="Днепровский">Днепровский</option>
+        <option value="Оболонский">Оболонский</option>
+        <option value="Печерский">Печерский</option>
+        <option value="Подольский">Подольский</option>
+        <option value="Святошинский">Святошинский</option>
+        <option value="Соломенский">Соломенский</option>
+        <option value="Шевченковский">Шевченковский</option>
+      </select>
+    </label>
+    <p></p>
+    <button (click)="filter()">Поиск</button>
+    <p></p>
+  </div>
+  <div class="pagination" *ngIf="advertisements.length > 0">
+    <a href="#" (click)="setPage(1)">&laquo;</a>
+    <a href="#" *ngIf="currentPage > 2" (click)="setPage(1)">1</a>
+    <a *ngIf="currentPage > 3">...</a>
+    <a href="#" *ngIf="currentPage > 1" (click)="setPage(currentPage - 1)">{{currentPage - 1}}</a>
+    <a class="active">{{currentPage}}</a>
+    <a href="#" *ngIf="currentPage < pagesCount" (click)="setPage(currentPage + 1)">{{currentPage + 1}}</a>
+    <a *ngIf="currentPage < pagesCount - 2">...</a>
+    <a href="#" *ngIf="currentPage < pagesCount - 1" (click)="setPage(pagesCount)">{{pagesCount}}</a>
+    <a href="#" (click)="setPage(pagesCount)">&raquo;</a>
+  </div>
+  <div class="row">
+    <span *ngIf="advertisements.length == 0">Результаты отсутствуют.</span>
+    <div class="col-md-6 col-sm-8 col-xs-12 col-md-offset-3 col-sm-offset-2">
+      <div class="card" *ngFor="let advertisement of advertisements">
+
+        <div class="image">
+          <img src="https://cdn.riastatic.com/photos/{{advertisement.image}}" width="100%">
+        </div>
+
+        <div class="text">
+
+          <div class="price">
+            <span>{{advertisement.price_hr}} грн</span><br><span class="small">{{advertisement.price_usd}} $</span>
+          </div>
+
+          <h3><a href="https://dom.ria.com/ru/{{advertisement.url}}">{{advertisement.short_title}}</a></h3>
+          <p>Район: {{advertisement.district}}</p>
+          <p>Количество комнат: {{advertisement.rooms_count}}</p>
+          <p style="min-height: 64.8px;">{{ (advertisement.description.length>100)? (advertisement.description | slice:0:100)+'...':(advertisement.description) }}</p>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+
+</html>
