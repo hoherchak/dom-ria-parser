@@ -64,7 +64,8 @@
       <div class="card" *ngFor="let advertisement of advertisements">
 
         <div class="image">
-          <img src="https://cdn.riastatic.com/photos/{{advertisement.image}}" width="100%">
+          <img src="https://cdn.riastatic.com/photos/{{advertisement.image}}" *ngIf="advertisement.image !== null" width="100%">
+          <img src="https://dom.riastatic.com/css/images/pictures/no_photo/135x90.png?v=1" *ngIf="advertisement.image === null" width="100%">
         </div>
 
         <div class="text">

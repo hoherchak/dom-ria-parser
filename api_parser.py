@@ -42,6 +42,9 @@ def parse_kyiv():
             short_name += ', {} ком. г. Киев'.format(data['rooms_count'])
             if 'metro_station_name' in data:
                 short_name += ' м. {}'.format(data['metro_station_name'])
+            image = None
+            if 'main_photo' in data:
+                image = data['main_photo'].replace('.jpg', 'b.jpg')
             advertisement = Advertisement(
                 code=ad_id,
                 title=title,
@@ -50,7 +53,7 @@ def parse_kyiv():
                 district=district,
                 rooms_count=data['rooms_count'],
                 url=data['beautiful_url'],
-                image=data['main_photo'].replace('.jpg', 'b.jpg'),
+                image=image,
                 price_hr=int(data['priceArr']['3'].replace(' ', '')),
                 price_usd=int(data['priceArr']['1'].replace(' ', '')),
                 created=datetime.strptime(data['publishing_date'], '%Y-%m-%d %H:%M:%S')
