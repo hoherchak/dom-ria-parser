@@ -39,15 +39,15 @@
     <p></p>
   </div>
   <div class="pagination" *ngIf="advertisements.length > 0">
-    <a href="#" (click)="setPage(1)">&laquo;</a>
-    <a href="#" *ngIf="currentPage > 2" (click)="setPage(1)">1</a>
+    <a [routerLink]="['']" [queryParams]="{ page: 1 }">&laquo;</a>
+    <a [routerLink]="['']" [queryParams]="{ page: 1 }" *ngIf="currentPage > 2">1</a>
     <a *ngIf="currentPage > 3">...</a>
-    <a href="#" *ngIf="currentPage > 1" (click)="setPage(currentPage - 1)">{{currentPage - 1}}</a>
+    <a [routerLink]="['']" [queryParams]="{ page: currentPage - 1 }" *ngIf="currentPage > 1">{{currentPage - 1}}</a>
     <a class="active">{{currentPage}}</a>
-    <a href="#" *ngIf="currentPage < pagesCount" (click)="setPage(currentPage + 1)">{{currentPage + 1}}</a>
+    <a [routerLink]="['']" [queryParams]="{ page: currentPage + 1 }" *ngIf="currentPage < pagesCount">{{currentPage + 1}}</a>
     <a *ngIf="currentPage < pagesCount - 2">...</a>
-    <a href="#" *ngIf="currentPage < pagesCount - 1" (click)="setPage(pagesCount)">{{pagesCount}}</a>
-    <a href="#" (click)="setPage(pagesCount)">&raquo;</a>
+    <a [routerLink]="['']" [queryParams]="{ page: pagesCount }" *ngIf="currentPage < pagesCount - 1">{{pagesCount}}</a>
+    <a [routerLink]="['']" [queryParams]="{ page: pagesCount }">&raquo;</a>
   </div>
   <div class="row">
     <span *ngIf="advertisements.length == 0">Результаты отсутствуют.</span>

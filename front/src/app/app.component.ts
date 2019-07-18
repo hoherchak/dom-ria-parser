@@ -35,10 +35,12 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.activateRoute.params.subscribe((params: Params) => {
-      const page = params['page'];
-      console.log(page);
-    });
+    this.activateRoute.queryParams
+      .subscribe(params => {
+        if (params.page) {
+          this.currentPage = Number(params.page);
+        }
+      });
     this.httpService.getStats()
       .subscribe((data) => {
         this.stats = data;
