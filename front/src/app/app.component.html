@@ -16,7 +16,7 @@
       Цена: от <input type="number" [(ngModel)]="priceLower" min="{{stats.price.min}}" max="{{priceUpper}}"> до <input type="number" [(ngModel)]="priceUpper" min="{{priceLower}}" max="{{stats.price.max}}">
     </label>
     <label>
-      Количество комнат: <input type="number" [(ngModel)]="roomsCount" min="0" max="{{stats.rooms_count.max}}">
+      Количество комнат: <input type="number" [(ngModel)]="roomsCount" min="1" max="{{stats.rooms_count.max}}">
     </label>
     <label>
       Район:

@@ -55,9 +55,11 @@ export class AppComponent implements OnInit {
   }
 
   refresh_list() {
-    this.httpService.getAdvertisements(this.currentPage, this.itemsPerPage, this.district, this.search, this.priceLower, this.priceUpper, this.roomsCount, this.sort)
+    this.httpService.getAdvertisements(this.currentPage, this.itemsPerPage, this.district, this.search, this.priceLower.toString(10), this.priceUpper.toString(10), this.roomsCount, this.sort)
       .subscribe((data) => {
+        // @ts-ignore
         this.advertisements = data.results;
+        // @ts-ignore
         this.pagesCount = Math.ceil(data.count / this.itemsPerPage);
       });
   }
