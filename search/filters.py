@@ -5,8 +5,8 @@ from search.models import Advertisement
 
 
 class AdvertisementFilter(filters.FilterSet):
-    price__gt = django_filters.NumberFilter(field_name='price_hr', lookup_expr='gt')
-    price__lt = django_filters.NumberFilter(field_name='price_hr', lookup_expr='lt')
+    price__gt = django_filters.NumberFilter(field_name='price_hr', lookup_expr='gte')
+    price__lt = django_filters.NumberFilter(field_name='price_hr', lookup_expr='lte')
     info = django_filters.CharFilter(field_name='info', method='info_action')
 
     def info_action(self, queryset, name, value):

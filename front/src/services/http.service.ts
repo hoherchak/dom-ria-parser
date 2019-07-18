@@ -13,7 +13,7 @@ export class HttpService {
     if (roomsCount === null) {
       roomsCount = '';
     }
-    return this.http.get(this.prefix + 'search/ads/?district=' + district + '&info=' + search + '&limit=' + itemsPerPage + '&offset=' + ((page - 1) * 20) + '&price__gt=' + priceLower + '&price__lt=' + priceUpper + '&rooms_count=' + roomsCount + '&sort=' + sort, {
+    return this.http.get(this.prefix + 'search/ads/?district=' + district + '&info=' + search + '&limit=' + itemsPerPage + '&offset=' + ((page - 1) * itemsPerPage) + '&price__gt=' + priceLower + '&price__lt=' + priceUpper + '&rooms_count=' + roomsCount + '&sort=' + sort, {
       headers: new HttpHeaders({
         'Content-Type':  'application/json'
       })
