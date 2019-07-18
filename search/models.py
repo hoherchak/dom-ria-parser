@@ -9,7 +9,7 @@ class Advertisement(models.Model):
     district = models.TextField(null=True, blank=True)
     rooms_count = models.IntegerField()
     url = models.TextField()
-    image = models.TextField()
+    image = models.TextField(null=True, blank=True)
     price_hr = models.IntegerField()
     price_usd = models.IntegerField()
     created = models.DateTimeField(null=True, blank=True)

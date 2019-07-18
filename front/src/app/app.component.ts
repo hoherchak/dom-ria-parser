@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpService} from '../services/http.service';
+import {ActivatedRoute, Params} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -30,10 +31,14 @@ export class AppComponent implements OnInit {
     }
   };
 
-  constructor(private httpService: HttpService) {
+  constructor(private httpService: HttpService, private activateRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
+    this.activateRoute.params.subscribe((params: Params) => {
+      const page = params['page'];
+      console.log(page);
+    });
     this.httpService.getStats()
       .subscribe((data) => {
         this.stats = data;
@@ -42,7 +47,7 @@ export class AppComponent implements OnInit {
         this.priceUpper = this.stats.price.max;
       });
     this.refresh_list();
-    this.currentPage = 1;
+    // this.currentPage = 1;
   }
 
   setPage(page: number) {
