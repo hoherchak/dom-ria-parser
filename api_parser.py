@@ -2,6 +2,7 @@ import json
 import math
 import os
 import sys
+from datetime import datetime
 
 import django
 import requests
@@ -51,7 +52,8 @@ def parse_kyiv():
                 url=data['beautiful_url'],
                 image=data['main_photo'].replace('.jpg', 'b.jpg'),
                 price_hr=int(data['priceArr']['3'].replace(' ', '')),
-                price_usd=int(data['priceArr']['1'].replace(' ', ''))
+                price_usd=int(data['priceArr']['1'].replace(' ', '')),
+                created=datetime.strptime(data['publishing_date'], '%Y-%m-%d %H:%M:%S')
             )
             advertisement.save()
             print(advertisement)

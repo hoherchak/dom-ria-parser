@@ -9,6 +9,7 @@ import {HttpService} from '../services/http.service';
 })
 export class AppComponent implements OnInit {
   advertisements: any = [];
+  itemsPerPage = 21;
   pagesCount = 0;
   currentPage = 1;
 
@@ -17,11 +18,29 @@ export class AppComponent implements OnInit {
   priceLower = 0;
   priceUpper = 1000000;
   roomsCount = '';
+  sort = 'time__desc';
+
+  stats: any = {
+    price: {
+      min: 0,
+      max: 1000000
+    },
+    rooms_count: {
+      max: 10
+    }
+  };
 
   constructor(private httpService: HttpService) {
   }
 
   ngOnInit() {
+    this.httpService.getStats()
+      .subscribe((data) => {
+        this.stats = data;
+        console.log(this.stats);
+        this.priceLower = this.stats.price.min;
+        this.priceUpper = this.stats.price.max;
+      });
     this.refresh_list();
     this.currentPage = 1;
   }
@@ -36,11 +55,10 @@ export class AppComponent implements OnInit {
   }
 
   refresh_list() {
-    this.httpService.getAdvertisements(this.currentPage, this.district, this.search, this.priceLower, this.priceUpper, this.roomsCount)
+    this.httpService.getAdvertisements(this.currentPage, this.itemsPerPage, this.district, this.search, this.priceLower, this.priceUpper, this.roomsCount, this.sort)
       .subscribe((data) => {
-        console.log(data);
         this.advertisements = data.results;
-        this.pagesCount = Math.ceil(data.count / 20.0);
+        this.pagesCount = Math.ceil(data.count / this.itemsPerPage);
       });
   }
 }

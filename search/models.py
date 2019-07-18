@@ -12,6 +12,7 @@ class Advertisement(models.Model):
     image = models.TextField()
     price_hr = models.IntegerField()
     price_usd = models.IntegerField()
+    created = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return self.title

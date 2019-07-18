@@ -15,7 +15,8 @@ body {
 
 .card {
   text-align: left;
-  display: inline-block;
+  display: block;
+  float: left;
   box-shadow: 0 1px 2px 0 rgba(0,0,0,.15);
   margin: 20px;
   position: relative;
@@ -27,7 +28,7 @@ body {
 .card:hover {
   /*box-shadow: 0 5px 22px 0 rgba(0,0,0,.25);*/
   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-  margin-bottom: 54px;
+  /*margin-bottom: 54px;*/
 }
 
 .image {
@@ -47,6 +48,7 @@ body {
   background: #FFF;
   padding: 20px;
   min-height: 200px;
+  height: 240px;
 }
 
 .text p {
@@ -123,4 +125,8 @@ button {
   color: white;
   padding: 8px 16px;
   border: none;
+}
+
+.row {
+  text-align: left;
 }

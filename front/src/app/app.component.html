@@ -13,10 +13,10 @@
     </label>
     <p></p>
     <label>
-      Цена: от <input type="number" [(ngModel)]="priceLower" min="0" max="{{priceUpper}}"> до <input type="number" [(ngModel)]="priceUpper" min="{{priceLower}}" max="">
+      Цена: от <input type="number" [(ngModel)]="priceLower" min="{{stats.price.min}}" max="{{priceUpper}}"> до <input type="number" [(ngModel)]="priceUpper" min="{{priceLower}}" max="{{stats.price.max}}">
     </label>
     <label>
-      Количество комнат: <input type="number" [(ngModel)]="roomsCount" min="0">
+      Количество комнат: <input type="number" [(ngModel)]="roomsCount" min="0" max="{{stats.rooms_count.max}}">
     </label>
     <label>
       Район:
@@ -51,7 +51,16 @@
   </div>
   <div class="row">
     <span *ngIf="advertisements.length == 0">Результаты отсутствуют.</span>
-    <div class="col-md-6 col-sm-8 col-xs-12 col-md-offset-3 col-sm-offset-2">
+    <label>
+      Сортировка:
+      <select [(ngModel)]="sort" (change)="filter()">
+        <option value="price__asc">по возрастанию цены</option>
+        <option value="price__desc">по убыванию цены</option>
+        <option value="time__desc">сначала новые</option>
+        <option value="time__asc">сначала старые</option>
+      </select>
+    </label>
+    <div class="grid">
       <div class="card" *ngFor="let advertisement of advertisements">
 
         <div class="image">
