@@ -32,7 +32,7 @@ def parse_kyiv():
         data = json.loads(r.text)
         for ad_id in data['items']:
             i += 1
-            if i >= 1599:
+            if i >= 2151:
                 r = s.get('https://dom.ria.com/ru/realty-dolgosrochnaya-arenda-kvartira-kiev-{}.html'.format(ad_id))
                 soup = BeautifulSoup(r.text, 'html.parser')
                 title = soup.h1.text
@@ -49,6 +49,7 @@ def parse_kyiv():
                 image = None
                 if 'main_photo' in data:
                     image = data['main_photo'].replace('.jpg', 'b.jpg')
+                print(data['priceArr'])
                 advertisement = Advertisement(
                     code=ad_id,
                     title=title,
