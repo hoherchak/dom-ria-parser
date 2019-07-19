@@ -10,8 +10,8 @@ class Advertisement(models.Model):
     rooms_count = models.IntegerField()
     url = models.TextField()
     image = models.TextField(null=True, blank=True)
-    price_hr = models.IntegerField()
-    price_usd = models.IntegerField()
+    price_hr = models.IntegerField(null=True, blank=True)
+    price_usd = models.IntegerField(null=True, blank=True)
     created = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):

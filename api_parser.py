@@ -50,19 +50,35 @@ def parse_kyiv():
                 if 'main_photo' in data:
                     image = data['main_photo'].replace('.jpg', 'b.jpg')
                 print(data['priceArr'])
-                advertisement = Advertisement(
-                    code=ad_id,
-                    title=title,
-                    short_title=short_name,
-                    description=data.get('description', None),
-                    district=data.get('district_name', None),
-                    rooms_count=data['rooms_count'],
-                    url=data['beautiful_url'],
-                    image=image,
-                    price_hr=int(data['priceArr']['3'].replace(' ', '')),
-                    price_usd=int(data['priceArr']['1'].replace(' ', '')),
-                    created=datetime.strptime(data['publishing_date'], '%Y-%m-%d %H:%M:%S')
-                )
+                if '1' in data['priceArr']:
+                    advertisement = Advertisement(
+                        code=ad_id,
+                        title=title,
+                        short_title=short_name,
+                        description=data.get('description', None),
+                        district=data.get('district_name', None),
+                        rooms_count=data['rooms_count'],
+                        url=data['beautiful_url'],
+                        image=image,
+                        price_hr=int(data['priceArr']['3'].replace(' ', '')),
+                        price_usd=int(data['priceArr']['1'].replace(' ', '')),
+                        created=datetime.strptime(data['publishing_date'], '%Y-%m-%d %H:%M:%S')
+                    )
+                else:
+                    advertisement = Advertisement(
+                        code=ad_id,
+                        title=title,
+                        short_title=short_name,
+                        description=data.get('description', None),
+                        district=data.get('district_name', None),
+                        rooms_count=data['rooms_count'],
+                        url=data['beautiful_url'],
+                        image=image,
+                        price_hr=None,
+                        price_usd=None,
+                        created=datetime.strptime(data['publishing_date'], '%Y-%m-%d %H:%M:%S')
+                    )
+
                 advertisement.save()
                 print(advertisement)
 
