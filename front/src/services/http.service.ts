@@ -4,7 +4,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable()
 export class HttpService {
-  prefix = 'http://lun-test-task.appspot.com/';
+  prefix = 'https://lun-test-task.appspot.com/';
 
   constructor(private http: HttpClient) {
   }
