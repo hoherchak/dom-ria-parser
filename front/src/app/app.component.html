@@ -74,7 +74,7 @@
             <span>{{advertisement.price_hr}} грн</span><br><span class="small">{{advertisement.price_usd}} $</span>
           </div>
 
-          <h3><a href="https://dom.ria.com/ru/{{advertisement.url}}">{{advertisement.short_title}}</a></h3>
+          <h3><a href="https://dom.ria.com/ru/{{advertisement.url}}" target="_blank">{{advertisement.short_title}}</a></h3>
           <p>Район: {{advertisement.district}}</p>
           <p>Количество комнат: {{advertisement.rooms_count}}</p>
           <p style="min-height: 64.8px;">{{ (advertisement.description.length>100)? (advertisement.description | slice:0:100)+'...':(advertisement.description) }}</p>
