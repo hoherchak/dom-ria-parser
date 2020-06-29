@@ -13,7 +13,7 @@ from search.serializers import AdvertisementSerializer, AdvertisementHaystackSer
 
 class AdvertisementList(generics.ListAPIView):
     serializer_class = AdvertisementSerializer
-    filter_backends = (filters.DjangoFilterBackend,)
+    filter_backends = (filters.DjangoFilterBackend, )
     filterset_class = AdvertisementFilter
 
     def get_queryset(self):
@@ -27,6 +27,11 @@ class AdvertisementList(generics.ListAPIView):
         if sort == 'time__asc':
             return Advertisement.objects.all().order_by('created')
         return Advertisement.objects.all()
+
+
+def queryset_gen(search_qs):
+    for item in search_qs:
+        yield item.object
 
 
 class AdvertisementListES(HaystackViewSet):

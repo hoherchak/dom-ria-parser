@@ -1,5 +1,6 @@
 import django_filters
 from django_filters import rest_framework as filters
+from drf_haystack.filters import HaystackFilter
 
 from search.models import Advertisement
 
