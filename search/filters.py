@@ -15,3 +15,12 @@ class AdvertisementFilter(filters.FilterSet):
     class Meta:
         model = Advertisement
         fields = ('rooms_count', 'district')
+
+
+class AdvertisementFilterES(filters.FilterSet):
+    price__gt = django_filters.NumberFilter(field_name='price_hr', lookup_expr='gte')
+    price__lt = django_filters.NumberFilter(field_name='price_hr', lookup_expr='lte')
+
+    class Meta:
+        model = Advertisement
+        fields = ('rooms_count', 'district')

@@ -1,12 +1,14 @@
 from django.db.models import Min, Max
 from django_filters import rest_framework as filters
+from drf_haystack.viewsets import HaystackViewSet
+from haystack.query import SearchQuerySet
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from search.filters import AdvertisementFilter
+from search.filters import AdvertisementFilter, AdvertisementFilterES
 from search.models import Advertisement
-from search.serializers import AdvertisementSerializer
+from search.serializers import AdvertisementSerializer, AdvertisementHaystackSerializer
 
 
 class AdvertisementList(generics.ListAPIView):
@@ -15,7 +17,7 @@ class AdvertisementList(generics.ListAPIView):
     filterset_class = AdvertisementFilter
 
     def get_queryset(self):
-        sort = self.request.GET['sort']
+        sort = self.request.GET.get('sort')
         if sort == 'price__asc':
             return Advertisement.objects.all().order_by('price_hr')
         if sort == 'price__desc':
@@ -25,6 +27,11 @@ class AdvertisementList(generics.ListAPIView):
         if sort == 'time__asc':
             return Advertisement.objects.all().order_by('created')
         return Advertisement.objects.all()
+
+
+class AdvertisementListES(HaystackViewSet):
+    index_models = [Advertisement]
+    serializer_class = AdvertisementHaystackSerializer
 
 
 class Statistics(APIView):
